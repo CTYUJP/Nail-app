@@ -1,24 +1,40 @@
-# README
+# Nail-app（仮）
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ネイルサロンを営んでいる知人のお店の予約サイトを作成してみました
 
-Things you may want to cover:
+## 開発環境
 
-* Ruby version
+* windows
+* Ruby on Rails   7.0.0
+* mysql 
 
-* System dependencies
+## 制作背景
 
-* Configuration
+後に記載
 
-* Database creation
+# テーブル設計
 
-* Database initialization
+## users テーブル
 
-* How to run the test suite
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| name               | string | null: false |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false |
 
-* Services (job queues, cache servers, search engines, etc.)
+### Association
 
-* Deployment instructions
+has_many :reservation, dependent: :destroy
 
-* ...
+## reservations テーブル
+
+| Column        | Type       | Options     |
+| ------------- | ---------- | ----------- |
+| user_id       | references | null: false |
+| day           | date       | null: false |
+| start_time    | datetime   | null: false |
+| end_time      | datetime   | null: false |
+
+### Association
+
+belongs_to :user
